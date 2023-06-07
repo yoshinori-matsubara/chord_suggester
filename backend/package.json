@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test",
-    "start": "nodemon ./src/server.js",
-    "migrate": "knex migrate:latest"
+    "start": "node ./src/server.js",
+    "migrate": "knex migrate:latest",
+    "build": "npm install && npx knex migrate:latest --knexfile knexfile.js"
   },
   "keywords": [],
   "author": "",
