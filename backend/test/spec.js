@@ -22,16 +22,31 @@ describe("Chord Progression API", () => {
     }).timeout(60 * 1000);
   });
 
-  describe("POST /api/chord-progression", () => {
+  describe("GET /api/my-chord-progressions", () => {
+    it("should return stored chord progressions", (done) => {
+      chai
+        .request(URL)
+        .get("/api/my-chord-progressions")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body).to.be.an("array");
+
+          done();
+        });
+    }).timeout(60 * 1000);
+  });
+
+  describe("POST /api/chord-progressions", () => {
     it("should save the chord progression to the database", (done) => {
       const requestBody = {
-        chordProgression: ["C", "G", "Am", "F"],
+        chordProgression: "C-G-Am-F",
         mood: "happy",
       };
 
       chai
         .request(URL)
-        .post("/api/chord-progression")
+        .post("/api/chord-progressions")
         .send(requestBody)
         .end((err, res) => {
           expect(res).to.have.status(200);
