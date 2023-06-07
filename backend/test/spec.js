@@ -2,9 +2,9 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const { expect } = chai;
 const URL = "http://localhost:8080";
-
 chai.use(chaiHttp);
 
+// テストはserver.jsでサーバー(localhost:8080)を立てた状態で実行
 describe("Chord Progression API", () => {
   describe("GET /api/chord-progressions", () => {
     it("should suggest chord progressions based on mood", (done) => {
@@ -15,7 +15,7 @@ describe("Chord Progression API", () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(JSON.parse(response.data.content)).to.be.an("array");
+          expect(JSON.parse(res.body.content)).to.be.an("array");
 
           done();
         });
