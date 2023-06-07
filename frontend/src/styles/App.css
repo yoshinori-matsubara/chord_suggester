@@ -1,0 +1,19 @@
+body {
+  overflow: hidden;
+  font-size: 3vh;
+  background-color: #e6dfcb;
+  color: #567947;
+  text-align: center;
+}
+
+.list {
+  border: solid;
+  height: 45vh;
+  width: 60vh;
+  top: 29%;
+  display: block;
+  overflow: scroll;
+  position: fixed;
+  border-radius: 2vh;
+  padding: 2vh;
+}

@@ -1,4 +1,25 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-end;
+  /* position: fixed; */
+  /* text-align: center; */
+  height: 100%;
+  bottom: 5vh;
+  position: fixed;
+  width: 100%;
+  z-index: -3;
+}
+
 .footer__button {
-  background-color: white;
-  border: none;
+  height: 7vh;
+  width: 7vh;
+  margin: 5vh;
+  cursor: pointer;
+}
+.footer__button:hover {
+  color: #e02613;
 }

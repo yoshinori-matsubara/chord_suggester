@@ -6,7 +6,7 @@ require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
-const port = 8080; // 使用するポート番号を指定してください
+const port = 8080;
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -34,10 +34,14 @@ app.get("/api/chord-progressions", async (req, res) => {
             role: "user",
             content: `mood: ${mood}\nPlease suggest some chord progressions that match the mood above.
             # rules #
+            ・
             ・Answer as Json {id,chordProgression}
             ・Type of "id" is number and "chordProgression" is string
             ・For the chord progression, please answer in the form of connecting each chord with a hyphen (e.g. "F-G-Em-Am")
-            ・Return should be the single Array[] that includes some objects like {id,chordProgression}`,
+            ・Return should be the single Array[] that includes some objects like {id,chordProgression}
+            ・Example of return is like '[{"id": 1,"chordProgression": "C-G-Am-F"}, {"id": 2,"chordProgression": "Em-G-D-A"}, {"id": 3,"chordProgression": "F-C-Dm-Bb"}]'
+            ・Any statement other than the output of the above array is prohibited
+            ・Do not write major chords as "maj", just write them like "C"`,
           },
         ],
       });
@@ -58,15 +62,23 @@ app.get("/api/chord-progressions", async (req, res) => {
 
 // コード保存API
 app.post("/api/chord-progressions", async (req, res) => {
-  const { chordProgression, mood } = req.body;
-  console.log(chordProgression);
+  const { chordProgressions, mood } = req.body;
+  console.log(chordProgressions);
   try {
-    // ここにデータベースへの保存処理を実装
-    await knex("chords").insert({
-      chord_progression: chordProgression,
-      mood: mood,
-    });
-    const result = await knex.select("*").from("chords");
+    const db = await knex.select("*").from("chords");
+    for (const chordProgression of chordProgressions) {
+      if (
+        !db.some(
+          (ele) =>
+            ele.mood === mood && ele.chord_progression === chordProgression
+        )
+      ) {
+        await knex("chords").insert({
+          chord_progression: chordProgression,
+          mood: mood,
+        });
+      }
+    }
     // 保存処理が成功した場合は適切なレスポンスを返す
     res.status(200).json({ message: "Chord progression saved successfully!" });
   } catch (error) {
@@ -80,6 +92,27 @@ app.get("/api/my-chord-progressions", async (req, res) => {
   try {
     const db = await knex.select("*").from("chords");
     res.status(200).json(db);
+  } catch (error) {
+    console.error("データベース保存エラー:", error.message);
+    res.status(500).json({ error: "Failed to save chord progression." });
+  }
+});
+
+//データベースから指定のコード進行を削除
+app.delete("/api/chord-progressions", async (req, res) => {
+  const deleteItems = req.body;
+  try {
+    {
+      for (const item of deleteItems) {
+        await knex("chords")
+          .where({
+            chord_progression: item.chordProgression,
+            mood: item.mood,
+          })
+          .delete();
+      }
+    }
+    res.status(200).json("db");
   } catch (error) {
     console.error("データベース保存エラー:", error.message);
     res.status(500).json({ error: "Failed to save chord progression." });

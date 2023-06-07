@@ -1,24 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import "./styles/ChordProgression.css";
 
-function ChordProgression() {
-  const [mood, setMood] = useState("");
-  const [chordProgression, setChordProgression] = useState([]);
+function ChordProgression(props) {
+  const {
+    mood,
+    setMood,
+    chordProgressions,
+    setChordProgressions,
+    selectedChordProgressions,
+    setSelectedChordProgressions,
+  } = props;
 
   useEffect(() => {
-    console.log(chordProgression);
-  }, [chordProgression]);
+    console.log(mood);
+  }, [mood]);
 
-  const saveChordProgression = async (chordProgression, mood) => {
+  const saveChordProgression = async () => {
+    if (selectedChordProgressions.length === 0) {
+      alert("保存するコード進行を選択してください。");
+      return;
+    }
+
     try {
-      await axios.post("http://localhost:8080/api/chord-progressions", {
-        chordProgression,
-        mood,
-      });
-      alert("Chord progression saved successfully!");
+      const response = await axios.post(
+        "http://localhost:8080/api/chord-progressions",
+        {
+          chordProgressions: selectedChordProgressions,
+          mood,
+        }
+      );
+      alert(response.data.message);
     } catch (error) {
       console.error("API呼び出しエラー:", error.message);
-      alert("Failed to save chord progression.");
+      alert("コード進行の保存に失敗しました。");
+    }
+  };
+
+  const handleCheckboxChange = (chordProgression) => {
+    const isChecked = selectedChordProgressions.includes(chordProgression);
+    if (isChecked) {
+      setSelectedChordProgressions(
+        selectedChordProgressions.filter((chord) => chord !== chordProgression)
+      );
+    } else {
+      setSelectedChordProgressions([
+        ...selectedChordProgressions,
+        chordProgression,
+      ]);
     }
   };
 
@@ -33,15 +62,7 @@ function ChordProgression() {
         `http://localhost:8080/api/chord-progressions/?mood=${mood}`
       );
       const responseData = JSON.parse(response.data.content);
-      const result = responseData.map((ele) => (
-        <li
-          key={ele.id}
-          onClick={() => saveChordProgression(ele.chordProgression, mood)}
-        >
-          {ele.chordProgression}
-        </li>
-      ));
-      setChordProgression(result);
+      setChordProgressions(responseData);
     } catch (error) {
       console.error("API呼び出しエラー:", error.message);
     }
@@ -49,17 +70,35 @@ function ChordProgression() {
 
   return (
     <div className="App">
-      <label htmlFor="mood-input">曲のイメージ:</label>
+      <h2>Suggestion</h2>
+      <label htmlFor="mood-input">Mood:</label>
       <input
         type="text"
         id="mood-input"
         value={mood}
         onChange={(e) => setMood(e.target.value)}
       />
-      <button onClick={suggestChordProgression}>提案</button>
-      <div id="result">
-        コード進行: <ul>{chordProgression}</ul>
+      <button onClick={suggestChordProgression}>Suggest</button>
+      <div className="result">
+        Chord Progressions:
+        <ul className="mark-list">
+          {chordProgressions.map((ele) => (
+            <li key={ele.id}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedChordProgressions.includes(
+                    ele.chordProgression
+                  )}
+                  onChange={() => handleCheckboxChange(ele.chordProgression)}
+                />
+                {ele.chordProgression}
+              </label>
+            </li>
+          ))}
+        </ul>
       </div>
+      <button onClick={saveChordProgression}>Save</button>
     </div>
   );
 }
