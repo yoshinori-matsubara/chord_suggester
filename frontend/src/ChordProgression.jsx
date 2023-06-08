@@ -3,7 +3,7 @@ import axios from "axios";
 import "./styles/ChordProgression.css";
 
 function ChordProgression(props) {
-  const url = process.env.DATABASE_URL || "http://localhost:8080";
+  const url = process.env.SERVER_URL || "http://localhost:8080";
   const {
     mood,
     setMood,
