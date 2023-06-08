@@ -6,7 +6,7 @@ require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
