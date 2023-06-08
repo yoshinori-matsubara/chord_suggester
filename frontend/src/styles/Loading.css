@@ -1,0 +1,31 @@
+.loading-container {
+  /* 例: 要素を中央に配置する */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 追加のカスタムスタイル */
+  /* 例: 背景色を設定する */
+  background-color: transparent;
+}
+
+.spinner {
+  /* スピナーのスタイルを定義する */
+  /* 例: ローディングアイコンを表示する */
+  width: 20px;
+  height: 20px;
+  border: 5px solid #9b9393;
+  border-top: 5px solid #4e4e4e;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+.content {
+  font-size: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -11,6 +11,8 @@ function ChordProgression(props) {
     setChordProgressions,
     selectedChordProgressions,
     setSelectedChordProgressions,
+    isLoading,
+    setIsLoading,
   } = props;
 
   const saveChordProgression = async () => {
@@ -45,20 +47,24 @@ function ChordProgression(props) {
     }
   };
 
-  const suggestChordProgression = async () => {
+  const suggestChordProgression = async (e) => {
     if (mood.trim() === "") {
       alert("雰囲気を入力してください。");
       return;
     }
-
+    // ローディングフラグ操作
+    e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${url}/api/chord-progressions/?mood=${mood}`
       );
       const responseData = JSON.parse(response.data.content);
       setChordProgressions(responseData);
+      setIsLoading(false);
     } catch (error) {
       console.error("API呼び出しエラー:", error.message);
+      setIsLoading(false);
     }
   };
 
