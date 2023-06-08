@@ -35,7 +35,6 @@ function List(props) {
 
   useEffect(() => {
     getMyList();
-    console.log(deleteItems);
   }, [props.view, selectedItems]);
 
   const handleItemSelect = (index, chordProgression, mood) => {
@@ -87,9 +86,7 @@ function List(props) {
           {myList}
         </div>
         {selectedItems.length > 0 && (
-          <button onClick={handleRemoveSelected}>
-            Remove selected chord progressions
-          </button>
+          <button onClick={handleRemoveSelected}>Remove</button>
         )}
       </div>
     </div>

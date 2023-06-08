@@ -15,7 +15,11 @@ cd chord_suggester/backend
 ```
 
 3. Install the required dependencies for backend:
-   npm install
+
+```
+npm install
+```
+
 4. Set up your .env file
    Copy .env.example into .env and add your OpenAI API key and model name
    Your .env file should look like this:
@@ -53,3 +57,16 @@ npm install
 ```
 npm start
 ```
+
+# Discription
+
+This app suggests chord progressions which are match with the mood you entered.
+
+# How to use
+
+1. Enter mood of song you want to compose in input box.
+2. Click "Suggest" button
+3. Suggested chord progressions are listed below
+4. If you find a code you like, you can save it by selecting it with the checkbox and pressing the "save" button
+5. Saved chord progressions can be viewed in a favorite list by pressing the list button at the bottom right of the screen
+6. If you want to delete a saved chord progression, select it with the check box on the favorite list screen and delete it with the "Remove" button.
