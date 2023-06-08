@@ -4,7 +4,6 @@ import "./styles/ChordProgression.css";
 
 function ChordProgression(props) {
   const url = process.env.REACT_APP_DATABASE_URL || "http://localhost:8080";
-  console.log(process.env);
   const {
     mood,
     setMood,
@@ -13,10 +12,6 @@ function ChordProgression(props) {
     selectedChordProgressions,
     setSelectedChordProgressions,
   } = props;
-
-  useEffect(() => {
-    console.log(mood);
-  }, [mood]);
 
   const saveChordProgression = async () => {
     if (selectedChordProgressions.length === 0) {

@@ -78,4 +78,4 @@ npm start
 
 # Release note
 
-2023.6.8 v1.0 released
+2023.6.8: v1.0 released
