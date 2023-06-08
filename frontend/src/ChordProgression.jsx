@@ -58,7 +58,7 @@ function ChordProgression(props) {
 
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/chord-progressions/?mood=${mood}`
+        `${url}/api/chord-progressions/?mood=${mood}`
       );
       const responseData = JSON.parse(response.data.content);
       setChordProgressions(responseData);
