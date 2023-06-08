@@ -3,7 +3,7 @@ import axios from "axios";
 import "./styles/List.css";
 
 function List(props) {
-  const url = process.env.PUBRIC_URL || "http://localhost:8080";
+  const url = process.env.REACT_APP_DATABASE_URL || "http://localhost:8080";
   const [myList, setMyList] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [deleteItems, setDeleteItems] = useState([]);
