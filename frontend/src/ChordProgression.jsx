@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import "./styles/ChordProgression.css";
 
-const url = process.env.DATABASE_URL || "http://localhost:8080";
-
 function ChordProgression(props) {
+  const url = process.env.DATABASE_URL || "http://localhost:8080";
   const {
     mood,
     setMood,

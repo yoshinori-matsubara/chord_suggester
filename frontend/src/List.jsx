@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles/List.css";
 
-const url = process.env.DATABASE_URL || "http://localhost:8080";
-
 function List(props) {
+  const url = process.env.DATABASE_URL || "http://localhost:8080";
   const [myList, setMyList] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [deleteItems, setDeleteItems] = useState([]);
