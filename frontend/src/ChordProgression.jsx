@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import "./styles/ChordProgression.css";
 
+const url = process.env.DATABASE_URL || "http://localhost:8080";
+
 function ChordProgression(props) {
   const {
     mood,
@@ -23,13 +25,10 @@ function ChordProgression(props) {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/chord-progressions",
-        {
-          chordProgressions: selectedChordProgressions,
-          mood,
-        }
-      );
+      const response = await axios.post(`${url}/api/chord-progressions`, {
+        chordProgressions: selectedChordProgressions,
+        mood,
+      });
       alert(response.data.message);
     } catch (error) {
       console.error("API呼び出しエラー:", error.message);

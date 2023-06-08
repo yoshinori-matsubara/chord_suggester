@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles/List.css";
 
+const url = process.env.DATABASE_URL || "http://localhost:8080";
+
 function List(props) {
   const [myList, setMyList] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -9,9 +11,7 @@ function List(props) {
 
   const getMyList = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/api/my-chord-progressions"
-      );
+      const response = await axios.get(`${url}/api/my-chord-progressions`);
       const responseData = await response.data;
       const result = responseData.map((ele, index) => (
         <div className="row" key={index}>
@@ -63,12 +63,9 @@ function List(props) {
 
   const handleRemoveSelected = async () => {
     try {
-      const response = await axios.delete(
-        "http://localhost:8080/api/chord-progressions",
-        {
-          data: deleteItems,
-        }
-      );
+      const response = await axios.delete(`${url}/api/chord-progressions`, {
+        data: deleteItems,
+      });
       if (response.status === 200) {
         getMyList(); // 更新されたリストを取得
         setSelectedItems([]); // 選択解除
