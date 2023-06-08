@@ -1,3 +1,7 @@
+# Discription
+
+This app suggests chord progressions which are match with the mood you entered.
+
 # Installation
 
 To set up and run ChordCoach locally, follow these steps:
@@ -58,10 +62,6 @@ npm install
 npm start
 ```
 
-# Discription
-
-This app suggests chord progressions which are match with the mood you entered.
-
 # How to use
 
 1. Enter mood of song you want to compose in input box.
@@ -70,3 +70,11 @@ This app suggests chord progressions which are match with the mood you entered.
 4. If you find a code you like, you can save it by selecting it with the checkbox and pressing the "save" button
 5. Saved chord progressions can be viewed in a favorite list by pressing the list button at the bottom right of the screen
 6. If you want to delete a saved chord progression, select it with the check box on the favorite list screen and delete it with the "Remove" button.
+
+#Future plan
+
+1. Filtering function for the favorites list
+2. Simple performance function by midi when chord progression is clicked
+
+#Release note
+2023.6.8 v1.0 released
