@@ -4,6 +4,7 @@ import ChordProgression from "./ChordProgression";
 import Loading from "./Loading";
 import List from "./List";
 import "./styles/App.css";
+import useMidi from "./hooks/useMidi";
 
 function App() {
   const [view, setView] = useState("chord-progressions");
@@ -13,6 +14,14 @@ function App() {
     []
   );
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedChordProgression, setSelectedChordProgression] = useState("");
+  const handleClick = (e) => {
+    setSelectedChordProgression(e.target.id);
+  };
+  const { playMidi, downloadMidi, selectInstrument, isPlaying } = useMidi(
+    selectedChordProgression,
+    120
+  );
 
   return (
     <div className="App">
@@ -27,12 +36,26 @@ function App() {
             setChordProgressions={setChordProgressions}
             selectedChordProgressions={selectedChordProgressions}
             setSelectedChordProgressions={setSelectedChordProgressions}
-            isLoading={isLoading}
             setIsLoading={setIsLoading}
+            playMidi={playMidi}
+            isPlaying={isPlaying}
+            downloadMidi={downloadMidi}
+            selectedChordProgression={selectedChordProgression}
+            setSelectedChordProgression={setSelectedChordProgression}
+            handleClick={handleClick}
           />
         )
       ) : (
-        <List view={view} className="list" />
+        <List
+          view={view}
+          className="list"
+          playMidi={playMidi}
+          isPlaying={isPlaying}
+          downloadMidi={downloadMidi}
+          selectedChordProgression={selectedChordProgression}
+          setSelectedChordProgression={setSelectedChordProgression}
+          handleClick={handleClick}
+        />
       )}
       <Footer setView={setView} />
     </div>

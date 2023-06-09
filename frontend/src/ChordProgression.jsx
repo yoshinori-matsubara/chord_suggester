@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import "./styles/ChordProgression.css";
+import Control from "./Control";
 
 function ChordProgression(props) {
   const url = process.env.REACT_APP_DATABASE_URL || "http://localhost:8080";
@@ -11,8 +12,12 @@ function ChordProgression(props) {
     setChordProgressions,
     selectedChordProgressions,
     setSelectedChordProgressions,
-    isLoading,
     setIsLoading,
+    playMidi,
+    isPlaying,
+    downloadMidi,
+    selectedChordProgression,
+    handleClick,
   } = props;
 
   const saveChordProgression = async () => {
@@ -92,13 +97,22 @@ function ChordProgression(props) {
                   )}
                   onChange={() => handleCheckboxChange(ele.chordProgression)}
                 />
-                {ele.chordProgression}
               </label>
+              <span id={ele.chordProgression} onClick={handleClick}>
+                {ele.chordProgression}
+              </span>
             </li>
           ))}
         </ul>
       </div>
       <button onClick={saveChordProgression}>Save</button>
+      <Control
+        className="control-area"
+        playMidi={playMidi}
+        isPlaying={isPlaying}
+        downloadMidi={downloadMidi}
+        selectedChordProgression={selectedChordProgression}
+      />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 .column-header {
-  display: flex;
   justify-content: space-between;
   font-weight: bold;
   margin-bottom: 1vh;
@@ -10,27 +9,32 @@
 .row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch; /* 列の要素を等しい高さに伸ばす */
   width: 100%;
   flex-wrap: wrap;
+  gap: 2vh; /* 適切な間隔を設定してください */
 }
 
 .column-header span {
   flex: 1;
   text-align: center;
   justify-content: center;
+  align-self: center; /* 列の要素を縦方向に中央揃えにする */
 }
 
 .chord-progression {
   text-align: center;
   flex: 1;
   justify-content: center;
+  white-space: nowrap; /* 折り返さずに表示する */
+  align-self: center; /* 列の要素を縦方向に中央揃えにする */
 }
 
 .mood {
   text-align: center;
   flex: 1;
   justify-content: center;
+  align-self: center; /* 列の要素を縦方向に中央揃えにする */
 }
 
 .list-block {
@@ -53,13 +57,33 @@
   max-width: 90vw;
 }
 
-.my-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1vh;
-  width: 100%;
+.list-block .list-area {
+  position: relative;
 }
+
+.list-block .list-area .control-area {
+  position: absolute;
+  top: 100%;
+}
+
+.my-list {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+/* .my-list th,
+.my-list td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+}
+
+.my-list .column-header th {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
 
 .select {
   display: flex;
