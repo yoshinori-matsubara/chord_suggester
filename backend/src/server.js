@@ -34,7 +34,6 @@ app.get("/api/chord-progressions", async (req, res) => {
             role: "user",
             content: `mood: ${mood}\nPlease suggest some chord progressions that match the mood above.
             # rules #
-            ・
             ・Answer as Json {id,chordProgression}
             ・Type of "id" is number and "chordProgression" is string
             ・For the chord progression, please answer in the form of connecting each chord with a hyphen (e.g. "F-G-Em-Am")
