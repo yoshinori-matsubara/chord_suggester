@@ -37,10 +37,6 @@ function App() {
             selectedChordProgressions={selectedChordProgressions}
             setSelectedChordProgressions={setSelectedChordProgressions}
             setIsLoading={setIsLoading}
-            playMidi={playMidi}
-            isPlaying={isPlaying}
-            downloadMidi={downloadMidi}
-            selectedChordProgression={selectedChordProgression}
             setSelectedChordProgression={setSelectedChordProgression}
             handleClick={handleClick}
           />
@@ -49,15 +45,18 @@ function App() {
         <List
           view={view}
           className="list"
-          playMidi={playMidi}
-          isPlaying={isPlaying}
-          downloadMidi={downloadMidi}
           selectedChordProgression={selectedChordProgression}
-          setSelectedChordProgression={setSelectedChordProgression}
           handleClick={handleClick}
         />
       )}
-      <Footer setView={setView} />
+      <Footer
+        setView={setView}
+        playMidi={playMidi}
+        isPlaying={isPlaying}
+        downloadMidi={downloadMidi}
+        selectInstrument={selectInstrument}
+        selectedChordProgression={selectedChordProgression}
+      />
     </div>
   );
 }

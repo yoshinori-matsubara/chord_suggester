@@ -39,9 +39,9 @@
 
 .list-block {
   border: solid;
-  height: 45vh;
-  width: 60vh;
-  top: 50%;
+  height: 34vh;
+  width: 100vh;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;

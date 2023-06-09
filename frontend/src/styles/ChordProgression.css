@@ -6,3 +6,11 @@
 .mark-list {
   list-style: none;
 }
+
+.title-chord-progression {
+  font-weight: bold;
+}
+
+.mood-label {
+  font-weight: bold;
+}

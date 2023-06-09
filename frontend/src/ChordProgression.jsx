@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import "./styles/ChordProgression.css";
-import Control from "./Control";
 
 function ChordProgression(props) {
   const url = process.env.REACT_APP_DATABASE_URL || "http://localhost:8080";
@@ -13,10 +12,6 @@ function ChordProgression(props) {
     selectedChordProgressions,
     setSelectedChordProgressions,
     setIsLoading,
-    playMidi,
-    isPlaying,
-    downloadMidi,
-    selectedChordProgression,
     handleClick,
   } = props;
 
@@ -76,7 +71,9 @@ function ChordProgression(props) {
   return (
     <div className="App">
       <h2>Suggestion</h2>
-      <label htmlFor="mood-input">Mood:</label>
+      <label className="mood-label" htmlFor="mood-input">
+        Mood:{" "}
+      </label>
       <input
         type="text"
         id="mood-input"
@@ -85,7 +82,7 @@ function ChordProgression(props) {
       />
       <button onClick={suggestChordProgression}>Suggest</button>
       <div className="result">
-        Chord Progressions:
+        <span className="title-chord-progression">Chord Progressions:</span>
         <ul className="mark-list">
           {chordProgressions.map((ele) => (
             <li key={ele.id}>
@@ -105,14 +102,11 @@ function ChordProgression(props) {
           ))}
         </ul>
       </div>
-      <button onClick={saveChordProgression}>Save</button>
-      <Control
-        className="control-area"
-        playMidi={playMidi}
-        isPlaying={isPlaying}
-        downloadMidi={downloadMidi}
-        selectedChordProgression={selectedChordProgression}
-      />
+      {selectedChordProgressions.length > 0 ? (
+        <button onClick={saveChordProgression}>Save</button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

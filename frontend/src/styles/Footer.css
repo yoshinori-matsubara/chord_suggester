@@ -23,3 +23,7 @@
 .footer__button:hover {
   color: #e02613;
 }
+
+.title-selected-chord-progression {
+  font-weight: bold;
+}

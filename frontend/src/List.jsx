@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles/List.css";
-import Control from "./Control";
 
 function List(props) {
-  const {
-    playMidi,
-    isPlaying,
-    downloadMidi,
-    selectedChordProgression,
-    setSelectedChordProgression,
-  } = props;
+  const { selectedChordProgression, handleClick } = props;
   const url = process.env.REACT_APP_DATABASE_URL || "http://localhost:8080";
   const [myList, setMyList] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [deleteItems, setDeleteItems] = useState([]);
-
-  const handleClick = (e) => {
-    setSelectedChordProgression(e.target.id);
-  };
 
   useEffect(() => {
     console.log(selectedChordProgression);
@@ -106,19 +95,15 @@ function List(props) {
                 <th>Mood</th>
               </tr>
             </thead>
-            <tbody>{myList}</tbody>
           </table>
+          <div>
+            <table className="my-list">
+              <tbody>{myList}</tbody>
+            </table>
+          </div>
           {selectedItems.length > 0 && (
             <button onClick={handleRemoveSelected}>Remove</button>
           )}
-          <Control
-            className="control-area"
-            playMidi={playMidi}
-            isPlaying={isPlaying}
-            downloadMidi={downloadMidi}
-            // selectInstrument={selectInstrument}
-            selectedChordProgression={selectedChordProgression}
-          />
         </div>
       </div>
     </div>
