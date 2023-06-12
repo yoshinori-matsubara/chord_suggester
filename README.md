@@ -67,13 +67,11 @@ npm start
 1. Enter mood of song you want to compose in input box.
 2. Click "Suggest" button
 3. Suggested chord progressions are listed below
-4. If you find a code you like, you can save it by selecting it with the checkbox and pressing the "save" button
-5. Saved chord progressions can be viewed in a favorite list by pressing the list button at the bottom right of the screen
-6. If you want to delete a saved chord progression, select it with the check box on the favorite list screen and delete it with the "Remove" button.
-
-# DEMO
-
-https://chord-coach.onrender.com/
+4. Click the chord progression you want to listen and click play button.
+5. If you find a code you like, you can save it by selecting it with the checkbox and pressing the "save" button
+6. You can download midi by clicking download button.
+7. Saved chord progressions can be viewed in a favorite list by clicking the list button at the bottom right of the screen
+8. If you want to delete a saved chord progression, select it with the check box on the favorite list screen and delete it with the "Remove" button.
 
 # Future plan
 
