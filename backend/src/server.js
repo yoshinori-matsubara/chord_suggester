@@ -111,7 +111,8 @@ app.delete("/api/chord-progressions", async (req, res) => {
           .delete();
       }
     }
-    res.status(200).json("db");
+    const db = await knex.select("*").from("chords");
+    res.status(200).json(db);
   } catch (error) {
     console.error("データベース保存エラー:", error.message);
     res.status(500).json({ error: "Failed to save chord progression." });
